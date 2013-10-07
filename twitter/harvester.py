@@ -3,10 +3,11 @@
 # hack@uchicago Introduction to Python Workshop
 # Borja Sotomayor, 2013
 
-"""Harvest N tweets from the Twitter public stream.
+"""Harvest tweets from Twitter
 
-Connects to the Twitter public stream and saves N tweets
-in JSON format.
+Connects to the Twitter API to either harvest tweets
+from the public stream, or saves tweets from a list
+of accounts.
  
 For this to work, you need to create an application on
 Twitter under your account (https://dev.twitter.com/apps/new).
@@ -51,6 +52,8 @@ def parse_command_line_arguments():
 
     parser.add_argument('-n', '--n', dest='n', action='store', type=int, required=True,
                        help='Number of tweets to harvest')
+    parser.add_argument('-u', '--userfile', dest='userfile', action='store',
+                       help='If specified, only fetch tweets from accounts specified in this file (one per line). The number of tweets per account is specified with the -n parameter.')
     parser.add_argument('-o', '--outfile', dest='outfile', action='store', required=True,
                        help='File to store the tweets in')
     parser.add_argument('-c', '--consumer-credentials', dest='consumer_credentials', action='store',
@@ -60,6 +63,14 @@ def parse_command_line_arguments():
     args = parser.parse_args()
     
     return args
+
+def save_tweet(tweet, f):
+    # Replace HTML entities
+    tweet["text"].replace("&gt;", ">")
+    tweet["text"].replace("&lt;", "<")
+    tweet["text"].replace("&amp;", "&")
+
+    print >>f, json.dumps(tweet)
 
 args = parse_command_line_arguments()
 
@@ -75,32 +86,38 @@ oauth_token, oauth_secret = twitter.read_token_file(user_credentials)
 
 auth=twitter.OAuth(oauth_token, oauth_secret, consumer_key, consumer_secret)
 
-# Connect to the stream
-stream = twitter.TwitterStream(auth=auth)
-
-sample_stream = stream.statuses.sample()
-
-# Fetch the tweets
 outfile = open(args.outfile, "w")
-fetched = 0
-print args.n
-for tweet in sample_stream:
-    # The public stream includes tweets, but also other messages, such
-    # as deletion notices. We are only interested in the tweets.
-    # See: https://dev.twitter.com/docs/streaming-apis/messages
-    if tweet.has_key("text"):
-        # We also only want English tweets
-        if tweet["lang"] == "en":
-            # Replace HTML entities
-            tweet["text"].replace("&gt;", ">")
-            tweet["text"].replace("&lt;", "<")
-            tweet["text"].replace("&amp;", "&")
 
-            print >>outfile, json.dumps(tweet)
-            fetched += 1
-            if fetched % 100 == 0:
-                print "Fetched %i tweets." % fetched
-            if fetched >= args.n:
-                break
+if args.userfile:
+    t = twitter.Twitter(auth=auth)
+
+    users = open(args.userfile).read().strip().replace("@", "").split()
+    for user in users:
+        print "Fetching %i tweets from @%s" % (args.n, user)
+        tweets = t.statuses.user_timeline(screen_name=user, count=args.n)      
+        for tweet in tweets:
+            save_tweet(tweet, outfile)
+else:
+    # Connect to the stream
+    stream = twitter.TwitterStream(auth=auth)
+
+    sample_stream = stream.statuses.sample()
+
+    # Fetch the tweets
+    fetched = 0
+    print args.n
+    for tweet in sample_stream:
+        # The public stream includes tweets, but also other messages, such
+        # as deletion notices. We are only interested in the tweets.
+        # See: https://dev.twitter.com/docs/streaming-apis/messages
+        if tweet.has_key("text"):
+            # We also only want English tweets
+            if tweet["lang"] == "en":
+                save_tweet(tweet, outfile)
+                fetched += 1
+                if fetched % 100 == 0:
+                    print "Fetched %i tweets." % fetched
+                if fetched >= args.n:
+                    break
 outfile.close()
 

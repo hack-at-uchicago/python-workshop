@@ -1,10 +1,12 @@
 import workshop
+import sys
 
-N = 10000 # Number of tweets to use
+tfile = sys.argv[1]
+n = int(sys.argv[2])
 
 lengths = {}
 
-for tweet in workshop.tweets_text(N):
+for tweet in workshop.tweets_text(n, tfile):
     length = len(tweet)
     if lengths.has_key(length):
         lengths[length] += 1

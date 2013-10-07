@@ -1,11 +1,13 @@
 import workshop
 import operator
+import sys
 
-N = 100000 # Number of tweets to use
+tfile = sys.argv[1]
+n = int(sys.argv[2])
 
 hashtags = {}
 
-for tweet in workshop.tweets(N):
+for tweet in workshop.tweets(n, tfile):
     tweet_hashtags = workshop.get_hashtags(tweet)
     for hashtag in tweet_hashtags:
         if hashtags.has_key(hashtag):

@@ -9,7 +9,6 @@ import json
 
 # Generator function to iterate through the tweets 
 # in the dataset.
-# By default, it will look for a file called tweets.json.
 #
 # This function is used like this:
 #
@@ -32,7 +31,7 @@ import json
 # Each iteration yields a single tweet, represented as a 
 # dictionary containing the fields returned by the Twitter API (see 
 # https://dev.twitter.com/docs/platform-objects/tweets)
-def tweets(n, filename = "tweets.json"):
+def tweets(n, filename):
     f = open(filename)
     read = 0
 
@@ -51,11 +50,11 @@ def tweets(n, filename = "tweets.json"):
 #  n - Maximum number of tweets to load from the dataset
 #      Note that fewer tweets may be returned if n is
 #      larger than the number of tweets in the dataset.
-#  filename - Dataset filename (tweets.json, by default)
+#  filename - Dataset filename
 #
 # Returns:
 # Each iteration yields the text of a single tweet.
-def tweets_text(n, filename = "tweets.json"):
+def tweets_text(n, filename):
     f = open(filename)
     read = 0
 
@@ -68,7 +67,6 @@ def tweets_text(n, filename = "tweets.json"):
 
 
 # Returns a list of tweets from the tweet dataset.
-# By default, it will look for a file called tweets.json.
 #
 # Parameters:
 #  n - Maximum number of tweets to load from the dataset
@@ -84,12 +82,11 @@ def tweets_text(n, filename = "tweets.json"):
 # List of tweets. Each tweet is a dictionary containing the
 # fields returned by the Twitter API (see 
 # https://dev.twitter.com/docs/platform-objects/tweets)
-def get_tweets(n, filename = "tweets.json"):
+def get_tweets(n, filename):
     return [t for t in tweets(n,filename)]
 
 
 # Returns a list of strings, with the text of tweets from the dataset.
-# By default, it will look for a file called tweets.json.
 #
 # Parameters:
 #  n - Maximum number of tweets to load from the dataset
@@ -103,7 +100,7 @@ def get_tweets(n, filename = "tweets.json"):
 #
 # Returns:
 # List of strings (the text of the tweets)
-def get_tweets_text(n, filename = "tweets.json"):
+def get_tweets_text(n, filename):
     return [t for t in tweets_text(n,filename)]
 
 
