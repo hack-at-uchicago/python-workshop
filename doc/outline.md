@@ -136,6 +136,12 @@ Write a script that computes the frequency of hashtags.
 
 Write a function that extracts a value from a tweet
 
+### Twitter example
+
+Write a function that returns the lengths of tweets.
+
+### Twitter exercise
+
 Write a compute frequencies function
 
 ## List Comprehensions
