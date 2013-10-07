@@ -1,13 +1,11 @@
 import workshop
 import operator
 
-N = 50000 # Number of tweets to use
-
-tweets = workshop.load_tweets(N)
+N = 100000 # Number of tweets to use
 
 hashtags = {}
 
-for tweet in tweets:
+for tweet in workshop.tweets(N):
     tweet_hashtags = workshop.get_hashtags(tweet)
     for hashtag in tweet_hashtags:
         if hashtags.has_key(hashtag):

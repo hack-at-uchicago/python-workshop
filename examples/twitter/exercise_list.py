@@ -3,12 +3,10 @@ import math
 
 N = 10000 # Number of tweets to use
 
-tweets = workshop.load_tweets_text(N)
-
 length_sum = 0
 lengths = []
 
-for tweet in tweets:
+for tweet in workshop.tweets_text(N):
     length_sum += len(tweet)
     lengths.append(len(tweet))
 

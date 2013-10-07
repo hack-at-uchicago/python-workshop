@@ -20,26 +20,30 @@ import json
 # List of tweets. Each tweet is a dictionary containing the
 # fields returned by the Twitter API (see 
 # https://dev.twitter.com/docs/platform-objects/tweets)
-def load_tweets(n, filename = "tweets.json"):
+def tweets(n, filename = "tweets.json"):
     f = open(filename)
-    tweets = []
-    loaded = 0
+    read = 0
 
     for line in f:
         tweet = json.loads(line)
-        tweets.append(tweet)
-        loaded += 1
-        if loaded == n:
+        read += 1
+        yield tweet
+        if read == n:
             break
-
-    return tweets
         
     
 # Same as load_tweets, but returning a list of strings
 # (with the texts of the tweets)
-def load_tweets_text(n, filename = "tweets.json"):
-    return [t["text"] for t in load_tweets(n,filename)]
+def tweets_text(n, filename = "tweets.json"):
+    f = open(filename)
+    read = 0
 
+    for line in f:
+        tweet = json.loads(line)
+        read += 1
+        yield tweet["text"]
+        if read == n:
+            break
 
 # Extracts hashtags from a tweet
 #

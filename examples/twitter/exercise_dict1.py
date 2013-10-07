@@ -2,11 +2,9 @@ import workshop
 
 N = 10000 # Number of tweets to use
 
-tweets = workshop.load_tweets_text(N)
-
 lengths = {}
 
-for tweet in tweets:
+for tweet in workshop.tweets_text(N):
     length = len(tweet)
     if lengths.has_key(length):
         lengths[length] += 1
