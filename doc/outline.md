@@ -2,7 +2,7 @@
 
 This is the outline of the workshop. These are not intended to be detailed lecture notes.
 
-The tweet dataset for the exercises is available at: http://people.cs.uchicago.edu/~borja/upload/tweets.zip [41MB]
+The tweet datasets for the exercises is available at: http://people.cs.uchicago.edu/~borja/upload/tweets.zip [41MB]
 
 ## Introduction to Python
 
@@ -18,9 +18,9 @@ We start by showing a piece of Python code. The goal is to highlight that, if yo
     
     print "n is " + str(n)
     
-Students should submit the output here: http://bit.ly/hackpyw
+Students should submit the output here: http://bit.ly/hack-python
 
-The correct output it:
+The correct output is:
 
     10
     76
@@ -65,7 +65,7 @@ Now, show the same code in the interpreter.
 
 ### Exercise
 
-Make sure that you are able to run the intro.py file from the command line. Next, try running that same code from the interpreter.
+Make sure that you are able to run the intro.py file from the command line (examples/simple/intro.py). Next, try running that same code from the interpreter.
 
 
 ## Lists
@@ -74,15 +74,23 @@ At this point, we're going to go through a lot of short examples on the IPython 
 
 Explain that we are not going to "lecture" about all the language features. Instead, we are going to show multiple examples (which students will have access to). When we get to the exercises, students will need to extrapolate from the various features that are highlighted in the examples.
 
-For lists, cover at least the following:
+Go through the following topics:
 
- - TODO
- - TODO
- - TODO
+ - Accessing lists ([], slicing)
+ - Extending lists (append, extend, insert)
+ - Removing (del, pop)
+ - Misc functions: len, min, max, sort
+ - Iterating through a list
  
 ### Twitter example
 
-Load N tweets (as list of strings). Write a script that prints the length of the tweets.
+get_tweet_lengths.py
+
+Explain the workshop.py module
+
+Load N tweets (as list of strings). First on the interpreter, then on a script.
+
+First without sys.argv. Then, add sys.argv.
 
 ### Twitter exercise
 
@@ -90,23 +98,47 @@ Load N tweets (as list of strings). Write a script that prints the length of the
 
 2. Modify it so it will also compute the standard deviation.
 
+Square root: 
+
+    import math
+    
+    math.sqrt(N)
+
+## Lists (redux)
+
+ - Strings
+ - Tuples
+
 ## Dictionaries
+
+ - Explain what a dictionary is (associative array, map of keys to values)
+ - Initializing, accessing dictionaries
+ - has_key, keys, values, items
+ - Misc functions: len, min, max, sort
 
 ### Twitter example
 
 Play around with the load_tweets() function (which returns a list of dictionaries).
 
+Dictionary contains values specified here: https://dev.twitter.com/docs/platform-objects/tweets
+
+print_tweet_info.py: Print some basic info
+
+get_length_frequencies.py: A script that computes the frequency of lengths of tweets.
+
+
 ### Twitter exercise
 
-Write a script that computes the frequency of lengths of tweets.
+Write a script that computes the frequency of hashtags.
 
-## List Comprehensions
-
-TODO
-
-Maybe use list comprehensions to do "queries" on the dataset?
 
 ## Functions
+
+Write a function that extracts a value from a tweet
+
+Write a compute frequencies function
+
+## List Comprehensions
 
 TODO
 
