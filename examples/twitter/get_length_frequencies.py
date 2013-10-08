@@ -1,3 +1,14 @@
+#!/usr/bin/python
+#
+# hack@uchicago Introduction to Python Workshop
+# Borja Sotomayor, 2013
+
+
+"""
+Prints out the frequency of lengths for the
+tweet dataset.
+"""
+
 import workshop
 import sys
 

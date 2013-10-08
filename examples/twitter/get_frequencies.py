@@ -1,3 +1,14 @@
+#!/usr/bin/python
+#
+# hack@uchicago Introduction to Python Workshop
+# Borja Sotomayor, 2013
+
+"""
+Prints out the ten most-frequent values for the
+"favorite_count" and "retweet_count" fields in a
+tweet dataset
+"""
+
 import workshop
 import operator
 import sys

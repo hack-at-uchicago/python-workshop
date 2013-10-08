@@ -1,3 +1,12 @@
+#!/usr/bin/python
+#
+# hack@uchicago Introduction to Python Workshop
+# Borja Sotomayor, 2013
+
+"""
+Prints some information for each tweet in the dataset
+"""
+
 import workshop
 import sys
 

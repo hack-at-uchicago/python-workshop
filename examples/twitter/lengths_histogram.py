@@ -1,3 +1,12 @@
+#!/usr/bin/python
+#
+# hack@uchicago Introduction to Python Workshop
+# Borja Sotomayor, 2013
+
+"""
+Generates a histogram of the tweet lengths
+"""
+
 import matplotlib.pyplot as plt
 from functions import extract_lengths
 import sys

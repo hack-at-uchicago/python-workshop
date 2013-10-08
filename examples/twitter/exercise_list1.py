@@ -1,3 +1,12 @@
+#!/usr/bin/python
+#
+# hack@uchicago Introduction to Python Workshop
+# Borja Sotomayor, 2013
+
+"""
+Compute the average length of the tweets
+"""
+
 import workshop
 import math
 import sys

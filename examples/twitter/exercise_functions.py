@@ -1,3 +1,8 @@
+#!/usr/bin/python
+#
+# hack@uchicago Introduction to Python Workshop
+# Borja Sotomayor, 2013
+
 import workshop
 
 def extract_lengths(n, tweets_file):
