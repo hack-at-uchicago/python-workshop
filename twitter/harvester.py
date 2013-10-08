@@ -66,9 +66,7 @@ def parse_command_line_arguments():
 
 def save_tweet(tweet, f):
     # Replace HTML entities
-    tweet["text"].replace("&gt;", ">")
-    tweet["text"].replace("&lt;", "<")
-    tweet["text"].replace("&amp;", "&")
+    tweet["text"] = tweet["text"].replace("&gt;", ">").replace("&lt;", "<").replace("&amp;", "&")
 
     print >>f, json.dumps(tweet)
 
