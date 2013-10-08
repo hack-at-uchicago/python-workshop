@@ -92,7 +92,8 @@ if args.userfile:
     users = open(args.userfile).read().strip().replace("@", "").split()
     for user in users:
         print "Fetching %i tweets from @%s" % (args.n, user)
-        tweets = t.statuses.user_timeline(screen_name=user, count=args.n)      
+        tweets = t.statuses.user_timeline(screen_name=user, count=args.n)   
+        print "  (actually fetched %i)" % len(tweets)    
         for tweet in tweets:
             save_tweet(tweet, outfile)
 else:
