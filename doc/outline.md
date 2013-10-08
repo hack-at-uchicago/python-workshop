@@ -2,7 +2,11 @@
 
 This is the outline of the workshop. These are not intended to be detailed lecture notes.
 
-The tweet datasets for the exercises is available at: http://people.cs.uchicago.edu/~borja/upload/tweets.zip [41MB]
+Workshop website: http://bit.ly/hack-python-workshop (http://hack-at-uchicago.github.io/python-workshop/)
+
+The tweet datasets for the exercises is available at: http://people.cs.uchicago.edu/~borja/upload/tweets.zip [45MB]
+
+The live code will be available at http://bit.ly/pyw-code
 
 ## Introduction to Python
 
@@ -15,7 +19,7 @@ We start by showing a piece of Python code. The goal is to highlight that, if yo
             print i
         else:   
             n += 1
-    
+
     print "n is " + str(n)
     
 Students should submit the output here: http://bit.ly/hack-python
@@ -183,8 +187,6 @@ and extract_values functions to do hist() visualizations with pylab.
 
     top_favorite = extract_values(20000, "top_tweets.json", "favorite_count")
     hist(top_favorite, bins=50, log=True)
-
-TODO: The above will run on ipython with pylab. Prepare self-contained .py files.
 
 TODO: Exercise?
 
