@@ -131,26 +131,62 @@ get_length_frequencies.py: A script that computes the frequency of lengths of tw
 
 Write a script that computes the frequency of hashtags.
 
+exercise_dict.py
 
 ## Functions
 
-Write a function that extracts a value from a tweet
+ - Writing functions
+ - Default parameter values
+ - Positional vs. keyword
+ - Returning values
 
 ### Twitter example
 
 Write a function that returns the lengths of tweets.
 
+functions.py
+
 ### Twitter exercise
 
-Write a compute frequencies function
+Write a function that extracts all the values of a field, and a function that generates the frequencies of those values.
+
+We provide get_frequencies.py. They implement exercise_functions.py.
+
 
 ## List Comprehensions
 
-TODO
+Show simple examples.
+
 
 ## Simple visualizations
 
-Take the length frequencies and plot them with matplotlib.
+Use the extract_lengths function and the compute_frequencies function to generate a simple plot:
+
+    lengths = functions.extract_lengths(20000, "tweets.json")
+    freqs = functions.compute_frequencies(lengths)
+    freqs = freqs.items()
+    freqs.sort()
+    xs = [f[0] for f in freqs]
+    ys = [f[1] for f in freqs]
+    plot(xs, ys)
+
+and extract_values functions to do hist() visualizations with pylab.
+
+    lengths = functions.extract_lengths(20000, "tweets.json")
+    top_lengths = functions.extract_lengths(20000, "top_tweets.json")
+
+    hist(lengths, bins=50)
+    hist(top_lengths, bins=50)
+
+    top_retweets = extract_values(20000, "top_tweets.json", "retweet_count")
+    hist(top_retweets, bins=50, log=True)
+
+    top_favorite = extract_values(20000, "top_tweets.json", "favorite_count")
+    hist(top_favorite, bins=50, log=True)
+
+TODO: The above will run on ipython with pylab. Prepare self-contained .py files.
+
+TODO: Exercise?
 
 ## Extra Topics
 
