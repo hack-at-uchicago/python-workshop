@@ -36,6 +36,14 @@ import argparse
 import twitter
 import json
 import os.path
+import signal
+import sys
+
+def signal_handler(signal, frame):
+        global outfile
+        outfile.close()
+        print('You pressed Ctrl+C!')
+        sys.exit(0)
 
 def parse_command_line_arguments():
     """Parses the arguments provided through the
@@ -51,11 +59,13 @@ def parse_command_line_arguments():
         epilog=epilog)
 
     parser.add_argument('-n', '--n', dest='n', action='store', type=int, required=True,
-                       help='Number of tweets to harvest')
+                       help='Number of tweets to harvest. Set to 0 to keep harvesting until the program is stopped explicitly.')
     parser.add_argument('-u', '--userfile', dest='userfile', action='store',
                        help='If specified, only fetch tweets from accounts specified in this file (one per line). The number of tweets per account is specified with the -n parameter.')
     parser.add_argument('-o', '--outfile', dest='outfile', action='store', required=True,
                        help='File to store the tweets in')
+    parser.add_argument('-f', '--filter', dest='filter', action='store', required=False,
+                       help='Filter stream by keywords (comma-separated list)')
     parser.add_argument('-c', '--consumer-credentials', dest='consumer_credentials', action='store',
                         default="./.twitter-oauth",
                         help='File with Twitter OAuth credentials (consumer key and secret, separated by a single space)')
@@ -98,14 +108,23 @@ if args.userfile:
             save_tweet(tweet, outfile)
 else:
     # Connect to the stream
-    stream = twitter.TwitterStream(auth=auth)
+    twitter_stream = twitter.TwitterStream(auth=auth)
 
-    sample_stream = stream.statuses.sample()
+    if args.filter is None:
+        stream = twitter_stream.statuses.sample()
+    else:
+        stream = twitter_stream.statuses.filter(track=args.filter)
 
     # Fetch the tweets
     fetched = 0
-    print args.n
-    for tweet in sample_stream:
+
+    if args.n > 0:
+        print "Fetching %i tweets... " % args.n
+    else:
+        signal.signal(signal.SIGINT, signal_handler)
+        print "Fetching tweets. Press Ctrl+C to stop."
+
+    for tweet in stream:
         # The public stream includes tweets, but also other messages, such
         # as deletion notices. We are only interested in the tweets.
         # See: https://dev.twitter.com/docs/streaming-apis/messages
@@ -116,7 +135,8 @@ else:
                 fetched += 1
                 if fetched % 100 == 0:
                     print "Fetched %i tweets." % fetched
-                if fetched >= args.n:
+                if args.n > 0 and fetched >= args.n:
                     break
+
 outfile.close()
 
