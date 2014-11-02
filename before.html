@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Introduction to Python Workshop by hack-at-uchicago</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Introduction to Python Workshop</h1>
+        <h2>Before the Workshop</h2>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="index.html" class="button fork"><strong>Main Page</strong></a>
+<!--
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/hack-at-uchicago/python-workshop/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/hack-at-uchicago/python-workshop/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+-->
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+	</nav>
+      <section>
+        
+
+        <p>To make sure we hit the ground running in the workshop, we need you to perform a few steps
+        <em>before</em> the day of the workshop. More specifically, we need to make sure you already have access
+        to a Python interpreter, either on a CS machine or on your own laptop.</p>
+
+      	<h2>Option 1: Using a CS Linux Login Server</h2>
+
+        <p>You will be able to run through all the examples and exercises of the workshop simply by logging
+        into one of the CS Linux login servers from your laptop. To do this, you must check the following
+        before the workshop:</p>
+
+        <ol>
+        <li><strong>Can you connect to the UChicago wireless network?</strong><br/>
+        If you are an alum, make sure you've claimed your Alumni CNetID. Otherwise, you will be unable to
+        get on the wireless network.</li>
+
+        <li><strong>Install an SSH client on your laptop</strong><br/>
+        If you are using a Mac or a Linux laptop, SSH is already installed on your laptop. To test that SSH is
+        correctly installed, open a Terminal and enter the following command:
+
+        <pre>ssh -V</pre>
+    
+        You should see something similar to this:
+
+        <pre>OpenSSH_5.9p1, OpenSSL 1.0.1 14 Mar 2012</pre>
+
+        If you are using a Windows laptop, you will need to install an SSH client. We recommend using 
+        <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</a>.</li>
+
+        <li><strong>Verify you can SSH into a CS UNIX machine</strong><br/>
+        <p>If you are using Mac or Linux, run SSH like this from the terminal:</p>
+
+        <pre>ssh username@linux.cs.uchicago.edu</pre>
+
+        <p>Substituting <tt>username</tt> for your CNetID. When asked for a password, enter your CNetID password.</p>
+
+        <p>If you are using Windows, use the following connection information:</p>
+
+        <ul>
+	    <li>Username: Your CNetID username</li>
+	    <li>Password: Your CNetID password</li>
+	    <li>Hostname/Server: <tt>linux.cs.uchicago.edu</tt></li>
+        </ul>
+
+        <p>Do not change any other connection parameters.</p>
+
+        <p>If your connection is successful, you should see the following prompt:</p>
+
+        <pre>username@linux1:~$ </pre>
+
+        <p>or:</p>
+
+        <pre>username@linux2:~$ </pre>
+
+        <p>If you are unable to connect to the CS Linux login server, you may need to request a CS
+        account (this will be the case if you've never taken a Computer Science class). You can request
+        a CS account <a href="https://cs.uchicago.edu/info/services/account_request">here</a>.</p>
+</li>
+
+
+
+      	<h2>Option 2: Installing Python on your Laptop</h2>
+
+        <p>You should can also follow the workshop examples and exercises by installing Python on your
+        laptop. However, please make sure you read the <a href="prerequisites.html">Prerequisites</a> page:
+        we specifically assume that you know how to use the command-line interface in your operating system.
+        Also, please note that the instructor and TAs have little to no experience with Windows systems,
+        and may not be able to assist you if you are using a Windows laptop. In that case, it is preferable
+        that you SSH to a CS Linux login server, as describe above.</p>
+
+        <p>If you install Python on your laptop, <em>do not install Python 3</em>. We will be using Python
+        2.7 in this workshop.</p>
+
+	<h3>Mac OS X</h3>
+	<ul>
+		<li>
+		If you have Mac OS X 10.6 or above, you already have Python installed by default. To confirm that you have Python installed, simply start a terminal (Applications->Terminal) and type 'python'. That should start the Python interpreter. If, instead, you get an error message stating that the command was not found, you need to install Python. 
+		</li>		
+		<li>
+		To install Python, please see the <a href="https://docs.python.org/2/using/mac.html">instructions</a> provided on the official Python documentation.
+		</li>
+	</ul>
+	<h3>Linux</h3>
+	<ul>
+		<li>
+        Python is usually installed by default on most Linux distros. If you cannot run <tt>python</tt> from
+        a terminal, you will need to use your system's package manager to install Python (the exact mechanism
+        will vary from distribution to distribution).
+		</li>
+	</ul>
+	<h3>Windows</h3>
+	<ul>
+		<li>
+        To install Python on Windows, please see the 
+        <a href="https://docs.python.org/2/using/windows.html">instructions</a> provided on the official Python
+        documentation. Make sure that you set up the environment variables as described in those instructions.
+        You should verify that you are ultimately able to run the <tt>python</tt> command from the Windows
+        Command Prompt
+        </li>
+	</ul>
+
+    <h3>IPython</h3>
+<ul><li>Optionally, you should also install the <a href="http://ipython.org/">IPython shell</a>. Their page provides detailed <a href="http://ipython.org/install.html">installation instructions</a>. Please note that, if you are unable to install IPython, you will still be able to follow the examples and exercises in the workshop. IPython provides some tools that you may find useful, but which are not strictly required for this workshop.</li></ul>
+
+	<h3>Trouble?</h3>
+	<ul>
+		<li>If you encounter any issues, we encourage you to register for the afternoon session (2pm-6pm).
+        TAs will be available from 1pm to 2pm to assist attendees in getting set up. Unfortunately, we cannot
+        provide this service before the morning session (9am-1pm).</li>
+	</ul>
+
+</ul>
+
+      </section>
+		
+
+      <footer>
+        <p>Project maintained by <a href="https://github.com/hack-at-uchicago">hack-at-uchicago</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
