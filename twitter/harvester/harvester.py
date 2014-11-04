@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 # hack@uchicago Introduction to Python Workshop
-# Borja Sotomayor, 2013
+# Borja Sotomayor, 2013-2014
 
 """Harvest tweets from Twitter
 
@@ -83,62 +83,64 @@ def save_tweet(tweet, f):
 
     print >>f, json.dumps(tweet)
 
-args = parse_command_line_arguments()
+if __name__ == "__main__":
 
-
-# OAuth magic
-consumer_key, consumer_secret = open(args.consumer_credentials).read().strip().split()
-
-if not os.path.exists(args.user_credentials):
-    twitter.oauth_dance("hack@uchicago Python Workshop", consumer_key, consumer_secret, args.user_credentials)
-
-oauth_token, oauth_secret = twitter.read_token_file(args.user_credentials)
-
-auth=twitter.OAuth(oauth_token, oauth_secret, consumer_key, consumer_secret)
-
-outfile = open(args.outfile, "w")
-
-if args.userfile:
-    t = twitter.Twitter(auth=auth)
-
-    users = open(args.userfile).read().strip().replace("@", "").split()
-    for user in users:
-        print "Fetching %i tweets from @%s" % (args.n, user)
-        tweets = t.statuses.user_timeline(screen_name=user, count=args.n)   
-        print "  (actually fetched %i)" % len(tweets)    
-        for tweet in tweets:
-            save_tweet(tweet, outfile)
-else:
-    # Connect to the stream
-    twitter_stream = twitter.TwitterStream(auth=auth)
-
-    if args.filter is None:
-        stream = twitter_stream.statuses.sample()
-    else:
-        stream = twitter_stream.statuses.filter(track=args.filter)
-
-    # Fetch the tweets
-    fetched = 0
-
-    if args.n > 0:
-        print "Fetching %i tweets... " % args.n
-    else:
-        signal.signal(signal.SIGINT, signal_handler)
-        print "Fetching tweets. Press Ctrl+C to stop."
-
-    for tweet in stream:
-        # The public stream includes tweets, but also other messages, such
-        # as deletion notices. We are only interested in the tweets.
-        # See: https://dev.twitter.com/docs/streaming-apis/messages
-        if tweet.has_key("text"):
-            # We also only want English tweets
-            if tweet["lang"] == "en":
+    args = parse_command_line_arguments()
+    
+    
+    # OAuth magic
+    consumer_key, consumer_secret = open(args.consumer_credentials).read().strip().split()
+    
+    if not os.path.exists(args.user_credentials):
+        twitter.oauth_dance("hack@uchicago Python Workshop", consumer_key, consumer_secret, args.user_credentials)
+    
+    oauth_token, oauth_secret = twitter.read_token_file(args.user_credentials)
+    
+    auth=twitter.OAuth(oauth_token, oauth_secret, consumer_key, consumer_secret)
+    
+    outfile = open(args.outfile, "w")
+    
+    if args.userfile:
+        t = twitter.Twitter(auth=auth)
+    
+        users = open(args.userfile).read().strip().replace("@", "").split()
+        for user in users:
+            print "Fetching %i tweets from @%s" % (args.n, user)
+            tweets = t.statuses.user_timeline(screen_name=user, count=args.n)   
+            print "  (actually fetched %i)" % len(tweets)    
+            for tweet in tweets:
                 save_tweet(tweet, outfile)
-                fetched += 1
-                if fetched % 100 == 0:
-                    print "Fetched %i tweets." % fetched
-                if args.n > 0 and fetched >= args.n:
-                    break
-
-outfile.close()
+    else:
+        # Connect to the stream
+        twitter_stream = twitter.TwitterStream(auth=auth)
+    
+        if args.filter is None:
+            stream = twitter_stream.statuses.sample()
+        else:
+            stream = twitter_stream.statuses.filter(track=args.filter)
+    
+        # Fetch the tweets
+        fetched = 0
+    
+        if args.n > 0:
+            print "Fetching %i tweets... " % args.n
+        else:
+            signal.signal(signal.SIGINT, signal_handler)
+            print "Fetching tweets. Press Ctrl+C to stop."
+    
+        for tweet in stream:
+            # The public stream includes tweets, but also other messages, such
+            # as deletion notices. We are only interested in the tweets.
+            # See: https://dev.twitter.com/docs/streaming-apis/messages
+            if tweet.has_key("text"):
+                # We also only want English tweets
+                if tweet["lang"] == "en":
+                    save_tweet(tweet, outfile)
+                    fetched += 1
+                    if fetched % 100 == 0:
+                        print "Fetched %i tweets." % fetched
+                    if args.n > 0 and fetched >= args.n:
+                        break
+    
+    outfile.close()
 
