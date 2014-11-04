@@ -69,6 +69,9 @@ def parse_command_line_arguments():
     parser.add_argument('-c', '--consumer-credentials', dest='consumer_credentials', action='store',
                         default="./.twitter-oauth",
                         help='File with Twitter OAuth credentials (consumer key and secret, separated by a single space)')
+    parser.add_argument('-k', '--user-credentials', dest='user_credentials', action='store',
+                        default="./.twitter-credentials",
+                        help='File with user credentials (fetched with the "OAuth Dance")')
 
     args = parser.parse_args()
     
@@ -86,11 +89,10 @@ args = parse_command_line_arguments()
 # OAuth magic
 consumer_key, consumer_secret = open(args.consumer_credentials).read().strip().split()
 
-user_credentials = './.twitter-credentials'
-if not os.path.exists(user_credentials):
-    twitter.oauth_dance("hack@uchicago Python Workshop", consumer_key, consumer_secret, user_credentials)
+if not os.path.exists(args.user_credentials):
+    twitter.oauth_dance("hack@uchicago Python Workshop", consumer_key, consumer_secret, args.user_credentials)
 
-oauth_token, oauth_secret = twitter.read_token_file(user_credentials)
+oauth_token, oauth_secret = twitter.read_token_file(args.user_credentials)
 
 auth=twitter.OAuth(oauth_token, oauth_secret, consumer_key, consumer_secret)
 
