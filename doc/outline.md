@@ -108,10 +108,15 @@ Square root:
     
     math.sqrt(N)
 
-## Lists (redux)
+## List Comprehensions
+
+Show simple examples.
+
+## More datatypes
 
  - Strings
  - Tuples
+ - Sets
 
 ## Dictionaries
 
@@ -157,16 +162,14 @@ Write a function that extracts all the values of a field, and a function that ge
 We provide get_frequencies.py. They implement exercise_functions.py.
 
 
-## List Comprehensions
 
-Show simple examples.
 
 
 ## Simple visualizations
 
 Use the extract_lengths function and the compute_frequencies function to generate a simple plot:
 
-    lengths = functions.extract_lengths(20000, "tweets.json")
+    lengths = functions.extract_lengths("tweets.json", 20000)
     freqs = functions.compute_frequencies(lengths)
     freqs = freqs.items()
     freqs.sort()
