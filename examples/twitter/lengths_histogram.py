@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 # hack@uchicago Introduction to Python Workshop
-# Borja Sotomayor, 2013
+# Borja Sotomayor, 2013-2014
 
 """
 Generates a histogram of the tweet lengths
@@ -14,7 +14,7 @@ import sys
 tfile = sys.argv[1]
 n = int(sys.argv[2])
 
-lengths = extract_lengths(n, tfile)
+lengths = extract_lengths(tfile, n)
 
 # Use Matplotlib to generate histogram
 plt.hist(lengths, bins=50)

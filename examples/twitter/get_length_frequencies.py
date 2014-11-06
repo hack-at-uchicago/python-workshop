@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 # hack@uchicago Introduction to Python Workshop
-# Borja Sotomayor, 2013
+# Borja Sotomayor, 2013-2014
 
 
 """
@@ -17,7 +17,7 @@ n = int(sys.argv[2])
 
 lengths = {}
 
-for tweet in workshop.tweets_text(n, tfile):
+for tweet in workshop.tweets_text(tfile, n):
     length = len(tweet)
     if lengths.has_key(length):
         lengths[length] += 1

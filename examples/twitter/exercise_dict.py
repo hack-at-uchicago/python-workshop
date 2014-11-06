@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 # hack@uchicago Introduction to Python Workshop
-# Borja Sotomayor, 2013
+# Borja Sotomayor, 2013-2014
 
 """
 Find the top ten hashtags in the dataset
@@ -16,7 +16,7 @@ n = int(sys.argv[2])
 
 hashtags = {}
 
-for tweet in workshop.tweets(n, tfile):
+for tweet in workshop.tweets(tfile, n):
     tweet_hashtags = workshop.get_hashtags(tweet)
     for hashtag in tweet_hashtags:
         if hashtags.has_key(hashtag):

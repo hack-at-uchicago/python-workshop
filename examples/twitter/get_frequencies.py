@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 # hack@uchicago Introduction to Python Workshop
-# Borja Sotomayor, 2013
+# Borja Sotomayor, 2013-2014
 
 """
 Prints out the ten most-frequent values for the
@@ -22,7 +22,7 @@ n = int(sys.argv[2])
 
 for field in ["favorite_count", "retweet_count"]:
     print "Top 10 frequencies of %s" % field
-    l = extract_values(n, tfile, field)
+    l = extract_values(tfile, n, field)
     freqs = compute_frequencies(l)
     freqs = freqs.items()
     freqs.sort(key = operator.itemgetter(1), reverse = True)

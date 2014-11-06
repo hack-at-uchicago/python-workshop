@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 # hack@uchicago Introduction to Python Workshop
-# Borja Sotomayor, 2013
+# Borja Sotomayor, 2013-2014
 
 """
 Compute the average length and standard deviation of the tweets
@@ -17,7 +17,7 @@ n = int(sys.argv[2])
 length_sum = 0.0
 lengths = []
 
-for tweet in workshop.tweets_text(n, tfile):
+for tweet in workshop.tweets_text(tfile, n):
     length_sum += len(tweet)
     lengths.append(len(tweet))
 

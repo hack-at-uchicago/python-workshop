@@ -1,6 +1,6 @@
 #
 # hack@uchicago Introduction to Python Workshop
-# Borja Sotomayor, 2013
+# Borja Sotomayor, 2013-2014
 #
 
 """Convenience functions for the workshop, mostly to access the tweet dataset."""
