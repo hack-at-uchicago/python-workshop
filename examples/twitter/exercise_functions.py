@@ -5,7 +5,7 @@
 
 import workshop
 
-def extract_lengths(n, tweets_file):
+def extract_lengths(tweets_file, n):
     l = []
     for tweet in workshop.tweets(tweets_file, n):
         l.append(len(tweet["text"]))

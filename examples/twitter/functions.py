@@ -25,7 +25,7 @@ def extract_lengths(tweets_file, n):
 
     return l
 
-def extract_values(n, tweets_file, field):
+def extract_values(tweets_file, n, field):
     # YOUR CODE HERE
 
     # Remember to update the return value

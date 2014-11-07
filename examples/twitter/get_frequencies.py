@@ -15,7 +15,7 @@ import sys
 
 # For this script to run, you need to implement the extract_values
 # and compute_frequencies values in exercise_functions.py
-from exercise_functions import extract_values, compute_frequencies
+from functions import extract_values, compute_frequencies
 
 tfile = sys.argv[1]
 n = int(sys.argv[2])
